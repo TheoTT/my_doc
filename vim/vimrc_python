@@ -14,6 +14,9 @@ Plugin 'VundleVim/Vundle.vim'
 "添加nerdtree插件
 Plugin 'scrooloose/nerdtree'
 
+"在nerdtree中展示git信息
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
 "使用tab键切换窗口与目录树
 Plugin 'jistr/vim-nerdtree-tabs'
 
@@ -48,9 +51,28 @@ Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 "注释 commenter: \cc \cu
 Plugin 'scrooloose/nerdcommenter'
 
+"文件内容搜索 ag
+Plugin 'mileszs/ack.vim'
+
+"markdown语法高亮
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+"markdown 实时预览, 需要安装：sudo npm -g install instant-markdown-d
+Plugin 'suan/vim-instant-markdown'
+
+" delimitMate来自动补全后大括号
+Plugin 'Raimondi/delimitMate'
+
+" 自动操作括号
+Plugin 'tpope/vim-surround'
+
 "你的所有插件需要在下面这行之前
 call vundle#end()
 
+
+" 设置文件内容搜索ag
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 "设置分割窗口
 set splitbelow
@@ -65,19 +87,42 @@ nnoremap <C-H> <C-W><C-H>
 " NERDTree插件的配置信息
 ""将F2设置为开关NERDTree的快捷键
 map <f2> :NERDTreeToggle<cr>
+
 ""修改树的显示图标
 "let g:NERDTreeDirArrowExpandable = '+'
 "let g:NERDTreeDirArrowCollapsible = '-'
-""窗口位置
+
+" 在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1
+
+"窗口位置
 let g:NERDTreeWinPos='left'
-""窗口尺寸
+
+"窗口尺寸
 let g:NERDTreewinSize=31
-""窗口是否显示行号
+
+"窗口是否显示行号
 "let g:NERDTreeShowLineNumbers=1
-""不显示隐藏文件
+
+"不显示隐藏文件
 let g:NERDTreeShowHidden=0
+
 "隐藏目录树种的.pyc文件
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+"nerdtree git 插件配置
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
 
 "youcompleteme  默认tab  s-tab 和自动补全冲突
 ""let g:ycm_key_list_select_completion=['<c-n>']
